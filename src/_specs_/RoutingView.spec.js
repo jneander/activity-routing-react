@@ -27,7 +27,7 @@ describe('RoutingView', () => {
     RoutingView = createRoutingView(context.RoutingConsumer)
 
     props = {
-      name: 'listUsers'
+      name: 'listUsers',
     }
   })
 

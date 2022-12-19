@@ -10,7 +10,7 @@ export default function createRoutingContext() {
   function RoutingProvider(props) {
     const [state, setState] = useState({
       currentActivity: props.routing.getCurrentActivity(),
-      routing: props.routing
+      routing: props.routing,
     })
 
     useLayoutEffect(() => {
@@ -24,7 +24,7 @@ export default function createRoutingContext() {
 
   RoutingProvider.propTypes = {
     children: node.isRequired,
-    routing: instanceOf(Routing)
+    routing: instanceOf(Routing),
   }
 
   class RoutingConsumer extends PureComponent {
@@ -34,7 +34,7 @@ export default function createRoutingContext() {
   }
 
   RoutingConsumer.propTypes = {
-    children: func.isRequired
+    children: func.isRequired,
   }
 
   function useRouting() {
@@ -71,6 +71,6 @@ export default function createRoutingContext() {
     RoutingProvider,
     useRouting,
     useRoutingTrigger,
-    useRoutingTriggerBuilder
+    useRoutingTriggerBuilder,
   }
 }

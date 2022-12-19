@@ -30,12 +30,12 @@ export default function createRoutingView(RoutingConsumer) {
   RoutingView.propTypes = {
     as: elementType,
     children: node,
-    name: string.isRequired
+    name: string.isRequired,
   }
 
   RoutingView.defaultProps = {
     as: null,
-    children: null
+    children: null,
   }
 
   return RoutingView

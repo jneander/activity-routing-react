@@ -25,7 +25,7 @@ describe('Routing Trigger', () => {
     routing = new Routing({history, router: exampleRouter})
 
     options = {
-      activityName: 'listUsers'
+      activityName: 'listUsers',
     }
 
     routingContext = createRoutingContext()
@@ -71,7 +71,7 @@ describe('Routing Trigger', () => {
   describe('.href property', () => {
     beforeEach(() => {
       options = {
-        activityName: 'listUsers'
+        activityName: 'listUsers',
       }
     })
 
@@ -91,8 +91,8 @@ describe('Routing Trigger', () => {
       options = {
         activityName: 'showUser',
         params: {
-          id: '123'
-        }
+          id: '123',
+        },
       }
       await renderComponent()
       const activity = getActivityFromLink()
@@ -104,8 +104,8 @@ describe('Routing Trigger', () => {
         activityName: 'listUsers',
         query: {
           page: 1,
-          perPage: 10
-        }
+          perPage: 10,
+        },
       }
       await renderComponent()
       const activity = getActivityFromLink()
