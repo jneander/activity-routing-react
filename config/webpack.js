@@ -18,37 +18,37 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-            options: require('@jneander/dev-spec').babelOptions
-          }
-        ]
-      }
-    ]
+            options: require('@jneander/dev-spec').babelOptions,
+          },
+        ],
+      },
+    ],
   },
 
   optimization: {
     removeAvailableModules: false,
     removeEmptyChunks: false,
-    splitChunks: false
+    splitChunks: false,
   },
 
   output: {
     filename: 'js/[name].js',
     path: path.join(pkgPath, '__build__'),
     pathinfo: false,
-    publicPath: '/'
+    publicPath: '/',
   },
 
   plugins: [
     new webpack.ProvidePlugin({
       process: 'process/browser.js',
-    })
+    }),
   ],
 
   resolve: {
-    modules: [srcPath, 'node_modules']
+    modules: [srcPath, 'node_modules'],
   },
 
   stats: {
-    colors: true
-  }
+    colors: true,
+  },
 }
