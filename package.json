@@ -9,14 +9,14 @@
     "build:production": "build-lib",
     "build:watch": "build-lib --watch",
     "clean": "clean",
-    "format": "yarn format:js",
+    "format": "npm run format:js",
     "format:js": "format-js --pattern './src/**/*.js'",
     "lint:js:fix": "lint-js --fix --pattern './src/**/*.js'",
     "lint:js:test": "lint-js --test --pattern './src/**/*.js'",
     "test": "./scripts/test.js",
-    "test:head": "yarn test --no-headless",
-    "test:head:watch": "yarn test --no-headless --watch",
-    "test:watch": "yarn test --watch"
+    "test:head": "npm run test -- --no-headless",
+    "test:head:watch": "npm run test -- --no-headless --watch",
+    "test:watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -33,7 +33,6 @@
     "@jneander/activity-routing-history": "^1.0.1",
     "@jneander/dev-build": "^1.0.1",
     "@jneander/dev-lint": "^1.0.1",
-    "@jneander/dev-spec": "^1.0.0",
     "@jneander/dev-utils-node": "^1.0.1",
     "@jneander/spec-utils-dom": "^1.1.2",
     "@jneander/spec-utils-react": "^1.0.1",
