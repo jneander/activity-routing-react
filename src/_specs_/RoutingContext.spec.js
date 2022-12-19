@@ -1,9 +1,9 @@
-import React from 'react'
-import sinon from 'sinon'
-
-import {Routing, createMemoryHistory} from '@jneander/activity-routing-history'
+import {Routing} from '@jneander/activity-routing-history'
 import {createContainer} from '@jneander/spec-utils-dom'
 import {render} from '@jneander/spec-utils-react'
+import {createMemoryHistory} from 'history'
+import React from 'react'
+import sinon from 'sinon'
 
 import createRoutingContext from '../createRoutingContext'
 import exampleRouter from './exampleRouter'
