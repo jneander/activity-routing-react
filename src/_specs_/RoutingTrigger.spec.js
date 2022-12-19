@@ -1,8 +1,8 @@
-import React from 'react'
-
-import {Routing, createMemoryHistory} from '@jneander/activity-routing-history'
+import {Routing} from '@jneander/activity-routing-history'
 import {createContainer, events} from '@jneander/spec-utils-dom'
 import {render} from '@jneander/spec-utils-react'
+import {createMemoryHistory} from 'history'
+import React from 'react'
 
 import createRoutingContext from '../createRoutingContext'
 import exampleRouter from './exampleRouter'
@@ -130,7 +130,7 @@ describe('Routing Trigger', () => {
     it('pushes the url into history by default', async () => {
       await renderComponent()
       getLink().click()
-      expect(history.entries).to.have.length(2)
+      expect(history.index).to.equal(1)
     })
 
     describe('when the .method prop is "push"', () => {
@@ -138,7 +138,7 @@ describe('Routing Trigger', () => {
         options.method = 'push'
         await renderComponent()
         getLink().click()
-        expect(history.entries).to.have.length(2)
+        expect(history.index).to.equal(1)
       })
     })
 
@@ -147,7 +147,7 @@ describe('Routing Trigger', () => {
         options.method = 'replace'
         await renderComponent()
         getLink().click()
-        expect(history.entries).to.have.length(1)
+        expect(history.index).to.equal(0)
       })
     })
 
