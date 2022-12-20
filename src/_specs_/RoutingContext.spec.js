@@ -26,7 +26,6 @@ describe('RoutingContext', () => {
     RoutingProvider = context.RoutingProvider
     RoutingConsumer = context.RoutingConsumer
 
-    /* eslint-disable-next-line react/display-name */
     childFn = routing => <h1>{routing.getCurrentActivity().name}</h1>
   })
 
