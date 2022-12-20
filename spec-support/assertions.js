@@ -1,4 +1,4 @@
-const chai = require('chai')
+import chai from 'chai'
 
 window.chai = chai
 window.expect = chai.expect
