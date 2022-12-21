@@ -1,6 +1,6 @@
 import {Routing} from '@jneander/activity-routing-history'
 import {createContainer} from '@jneander/spec-utils-dom'
-import {render} from '@testing-library/react'
+import {act, render} from '@testing-library/react'
 import {History, createMemoryHistory} from 'history'
 import type {ReactNode} from 'react'
 import sinon from 'sinon'
@@ -60,9 +60,11 @@ describe('RoutingContext', () => {
     expect($activity.textContent).to.equal('home')
   })
 
-  it('re-renders when the current activity changes', async () => {
+  it.only('re-renders when the current activity changes', async () => {
     await renderComponent()
-    history.push('/users')
+    act(() => {
+      history.push('/users')
+    })
     const $activity = container.querySelector('h1')
     expect($activity.textContent).to.equal('listUsers')
   })
