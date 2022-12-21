@@ -1,2 +1,2 @@
-export * from './createRoutingContext'
-export * from './createRoutingView'
+export * from './routing-context'
+export * from './routing-view'

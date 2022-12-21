@@ -5,8 +5,8 @@ import {createMemoryHistory} from 'history'
 import React from 'react'
 import sinon from 'sinon'
 
-import {createRoutingContext} from '../createRoutingContext'
-import {router} from './exampleRouter'
+import {createRoutingContext} from '../routing-context'
+import {router} from './example-router'
 
 describe('RoutingContext', () => {
   let $container
