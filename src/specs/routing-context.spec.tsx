@@ -1,6 +1,6 @@
 import {Routing} from '@jneander/activity-routing-history'
 import {createContainer} from '@jneander/spec-utils-dom'
-import {render} from '@jneander/spec-utils-react'
+import {render} from '@testing-library/react'
 import {History, createMemoryHistory} from 'history'
 import type {ReactNode} from 'react'
 import sinon from 'sinon'
@@ -10,16 +10,16 @@ import type {RoutingConsumer, RoutingProvider} from '../types'
 import {router} from './example-router'
 
 describe('RoutingContext', () => {
-  let $container: HTMLElement
+  let container: HTMLElement
   let childFn: (routing: Routing) => ReactNode
-  let component: Awaited<ReturnType<typeof render>>
+  let component: ReturnType<typeof render>
   let history: History
   let routing: Routing
   let RoutingConsumer: RoutingConsumer
   let RoutingProvider: RoutingProvider
 
   beforeEach(() => {
-    $container = createContainer()
+    container = createContainer()
 
     history = createMemoryHistory()
     routing = new Routing({history, router: router})
@@ -32,7 +32,7 @@ describe('RoutingContext', () => {
 
   afterEach(() => {
     component.unmount()
-    $container.remove()
+    container.remove()
   })
 
   async function renderComponent() {
@@ -41,7 +41,7 @@ describe('RoutingContext', () => {
         <RoutingConsumer>{childFn}</RoutingConsumer>
       </RoutingProvider>
     )
-    component = await render(element, {$container})
+    component = render(element, {container})
   }
 
   it('passes the router to the "children" render prop', async () => {
@@ -56,14 +56,14 @@ describe('RoutingContext', () => {
 
   it('displays the result of the children prop render function', async () => {
     await renderComponent()
-    const $activity = $container.querySelector('h1')
+    const $activity = container.querySelector('h1')
     expect($activity.textContent).to.equal('home')
   })
 
   it('re-renders when the current activity changes', async () => {
     await renderComponent()
     history.push('/users')
-    const $activity = $container.querySelector('h1')
+    const $activity = container.querySelector('h1')
     expect($activity.textContent).to.equal('listUsers')
   })
 

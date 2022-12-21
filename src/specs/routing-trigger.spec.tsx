@@ -1,7 +1,7 @@
 import type {ActivityParams, ActivityQuery} from '@jneander/activity-routing'
 import {Routing} from '@jneander/activity-routing-history'
 import {createContainer, events} from '@jneander/spec-utils-dom'
-import {render} from '@jneander/spec-utils-react'
+import {render} from '@testing-library/react'
 import {History, createMemoryHistory} from 'history'
 import {MouseEvent as ReactMouseEvent} from 'react'
 
@@ -12,8 +12,8 @@ import {RoutingContext} from '../types'
 type ActivitySetMethod = Parameters<Routing['setActivity']>[1]
 
 describe('Routing Trigger', () => {
-  let $container: HTMLElement
-  let component: Awaited<ReturnType<typeof render>>
+  let container: HTMLElement
+  let component: ReturnType<typeof render>
   let defaultPrevented: boolean
   let history: History
   let routing: Routing
@@ -28,7 +28,7 @@ describe('Routing Trigger', () => {
   }
 
   beforeEach(() => {
-    $container = createContainer()
+    container = createContainer()
     defaultPrevented = null
 
     history = createMemoryHistory()
@@ -43,7 +43,7 @@ describe('Routing Trigger', () => {
 
   afterEach(() => {
     component.unmount()
-    $container.remove()
+    container.remove()
   })
 
   function SpecComponent() {
@@ -66,7 +66,7 @@ describe('Routing Trigger', () => {
         </RoutingProvider>
       </div>
     )
-    component = await render(element, {$container})
+    component = render(element, {container})
   }
 
   function interceptClick(event: ReactMouseEvent<HTMLElement, MouseEvent>) {
@@ -75,7 +75,7 @@ describe('Routing Trigger', () => {
   }
 
   function getLink() {
-    return $container.querySelector('a')
+    return container.querySelector('a')
   }
 
   describe('.href property', () => {
