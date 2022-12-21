@@ -4,9 +4,9 @@ import {render} from '@jneander/spec-utils-react'
 import {createMemoryHistory} from 'history'
 import React from 'react'
 
-import createRoutingContext from '../createRoutingContext'
-import createRoutingView from '../createRoutingView'
-import exampleRouter from './exampleRouter'
+import {createRoutingContext} from '../createRoutingContext'
+import {createRoutingView} from '../createRoutingView'
+import {router} from './exampleRouter'
 
 describe('RoutingView', () => {
   let $container
@@ -21,7 +21,7 @@ describe('RoutingView', () => {
     $container = createContainer()
 
     history = createMemoryHistory()
-    routing = new Routing({history, router: exampleRouter})
+    routing = new Routing({history, router: router})
     const context = createRoutingContext()
     RoutingProvider = context.RoutingProvider
     RoutingView = createRoutingView(context.RoutingConsumer)

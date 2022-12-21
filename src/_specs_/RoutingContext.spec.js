@@ -5,8 +5,8 @@ import {createMemoryHistory} from 'history'
 import React from 'react'
 import sinon from 'sinon'
 
-import createRoutingContext from '../createRoutingContext'
-import exampleRouter from './exampleRouter'
+import {createRoutingContext} from '../createRoutingContext'
+import {router} from './exampleRouter'
 
 describe('RoutingContext', () => {
   let $container
@@ -21,7 +21,7 @@ describe('RoutingContext', () => {
     $container = createContainer()
 
     history = createMemoryHistory()
-    routing = new Routing({history, router: exampleRouter})
+    routing = new Routing({history, router: router})
     const context = createRoutingContext()
     RoutingProvider = context.RoutingProvider
     RoutingConsumer = context.RoutingConsumer

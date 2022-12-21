@@ -1,7 +1,7 @@
 import {elementType, node, string} from 'prop-types'
 import React from 'react'
 
-export default function createRoutingView(RoutingConsumer) {
+export function createRoutingView(RoutingConsumer) {
   function RoutingView(props) {
     const {as: Component, children} = props
 
