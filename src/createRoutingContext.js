@@ -3,7 +3,7 @@ import React, {PureComponent, createContext, useContext, useLayoutEffect, useSta
 
 import {Routing} from '@jneander/activity-routing-history'
 
-export default function createRoutingContext() {
+export function createRoutingContext() {
   const context = createContext()
   const {Consumer, Provider} = context
 

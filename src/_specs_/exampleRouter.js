@@ -1,6 +1,6 @@
 import {Router} from '@jneander/activity-routing'
 
-const router = new Router()
+export const router = new Router()
 
 router.add('home', '/')
 
@@ -15,5 +15,3 @@ router.within('/users', usersContext => {
 })
 
 router.add('notFound', '*')
-
-export default router

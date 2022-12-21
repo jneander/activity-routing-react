@@ -4,8 +4,8 @@ import {render} from '@jneander/spec-utils-react'
 import {createMemoryHistory} from 'history'
 import React from 'react'
 
-import createRoutingContext from '../createRoutingContext'
-import exampleRouter from './exampleRouter'
+import {createRoutingContext} from '../createRoutingContext'
+import {router} from './exampleRouter'
 
 describe('Routing Trigger', () => {
   let $container
@@ -22,7 +22,7 @@ describe('Routing Trigger', () => {
     defaultPrevented = null
 
     history = createMemoryHistory()
-    routing = new Routing({history, router: exampleRouter})
+    routing = new Routing({history, router: router})
 
     options = {
       activityName: 'listUsers',
@@ -78,7 +78,7 @@ describe('Routing Trigger', () => {
     function getActivityFromLink() {
       const href = getLink().getAttribute('href')
       const [path, query] = href.split('?')
-      return exampleRouter.buildActivityFromLocation(path, query)
+      return router.buildActivityFromLocation(path, query)
     }
 
     it('links to the url of the activity', async () => {
