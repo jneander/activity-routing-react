@@ -4,8 +4,8 @@ import {render} from '@jneander/spec-utils-react'
 import {createMemoryHistory} from 'history'
 import React from 'react'
 
-import {createRoutingContext} from '../createRoutingContext'
-import {router} from './exampleRouter'
+import {createRoutingContext} from '../routing-context'
+import {router} from './example-router'
 
 describe('Routing Trigger', () => {
   let $container
