@@ -1,8 +1,15 @@
-import {elementType, node, string} from 'prop-types'
-import React from 'react'
+import type {ElementType, ReactNode} from 'react'
 
-export function createRoutingView(RoutingConsumer) {
-  function RoutingView(props) {
+import type {RoutingConsumer} from './types'
+
+export interface RoutingViewProps {
+  as?: ElementType
+  children: ReactNode
+  name: string
+}
+
+export function createRoutingView(RoutingConsumer: RoutingConsumer) {
+  return function RoutingView(props: RoutingViewProps) {
     const {as: Component, children} = props
 
     const renderChildren = () => {
@@ -26,17 +33,4 @@ export function createRoutingView(RoutingConsumer) {
       </RoutingConsumer>
     )
   }
-
-  RoutingView.propTypes = {
-    as: elementType,
-    children: node,
-    name: string.isRequired,
-  }
-
-  RoutingView.defaultProps = {
-    as: null,
-    children: null,
-  }
-
-  return RoutingView
 }

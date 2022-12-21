@@ -1,13 +1,23 @@
-import {func, instanceOf, node} from 'prop-types'
-import React, {PureComponent, createContext, useContext, useLayoutEffect, useState} from 'react'
-
 import {Routing} from '@jneander/activity-routing-history'
+import {ActivityParams, ActivityQuery} from '@jneander/activity-routing'
+import {
+  MouseEvent as ReactMouseEvent,
+  PureComponent,
+  createContext,
+  useContext,
+  useLayoutEffect,
+  useState,
+} from 'react'
 
-export function createRoutingContext() {
-  const context = createContext()
+import type {RoutingConsumerProps, RoutingContext, RoutingProviderProps} from './types'
+
+type ActivitySetMethod = Parameters<Routing['setActivity']>[1]
+
+export function createRoutingContext(): RoutingContext {
+  const context = createContext(null)
   const {Consumer, Provider} = context
 
-  function RoutingProvider(props) {
+  function RoutingProvider(props: RoutingProviderProps) {
     const [state, setState] = useState({
       currentActivity: props.routing.getCurrentActivity(),
       routing: props.routing,
@@ -22,22 +32,13 @@ export function createRoutingContext() {
     return <Provider value={state}>{props.children}</Provider>
   }
 
-  RoutingProvider.propTypes = {
-    children: node.isRequired,
-    routing: instanceOf(Routing),
-  }
-
-  class RoutingConsumer extends PureComponent {
+  class RoutingConsumerImpl extends PureComponent<RoutingConsumerProps> {
     render() {
       return <Consumer>{providerState => this.props.children(providerState.routing)}</Consumer>
     }
   }
 
-  RoutingConsumer.propTypes = {
-    children: func.isRequired,
-  }
-
-  function useRouting() {
+  function useRouting(): Routing {
     const value = useContext(context)
     return value.routing
   }
@@ -45,10 +46,15 @@ export function createRoutingContext() {
   function useRoutingTriggerBuilder() {
     const routing = useRouting()
 
-    return function build(activityName, params = {}, query = {}, method = 'push') {
+    return function build(
+      activityName: string,
+      params: ActivityParams = {},
+      query: ActivityQuery = {},
+      method: ActivitySetMethod = 'push',
+    ) {
       const activity = routing.router.buildActivity(activityName, params, query)
 
-      const onClick = event => {
+      function onClick(event: ReactMouseEvent<HTMLAnchorElement, MouseEvent>): void {
         if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
           return
         }
@@ -61,13 +67,18 @@ export function createRoutingContext() {
     }
   }
 
-  function useRoutingTrigger(activityName, params = {}, query = {}, method = 'push') {
+  function useRoutingTrigger(
+    activityName: string,
+    params: ActivityParams = {},
+    query: ActivityQuery = {},
+    method: ActivitySetMethod = 'push',
+  ) {
     const build = useRoutingTriggerBuilder()
     return build(activityName, params, query, method)
   }
 
   return {
-    RoutingConsumer,
+    RoutingConsumer: RoutingConsumerImpl,
     RoutingProvider,
     useRouting,
     useRoutingTrigger,

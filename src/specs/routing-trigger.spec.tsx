@@ -1,21 +1,31 @@
+import type {ActivityParams, ActivityQuery} from '@jneander/activity-routing'
 import {Routing} from '@jneander/activity-routing-history'
 import {createContainer, events} from '@jneander/spec-utils-dom'
 import {render} from '@jneander/spec-utils-react'
-import {createMemoryHistory} from 'history'
-import React from 'react'
+import {History, createMemoryHistory} from 'history'
+import {MouseEvent as ReactMouseEvent} from 'react'
 
 import {createRoutingContext} from '../routing-context'
 import {router} from './example-router'
+import {RoutingContext} from '../types'
+
+type ActivitySetMethod = Parameters<Routing['setActivity']>[1]
 
 describe('Routing Trigger', () => {
-  let $container
-  let component
-  let defaultPrevented
-  let history
-  let options
-  let routing
-  let routingContext
+  let $container: HTMLElement
+  let component: Awaited<ReturnType<typeof render>>
+  let defaultPrevented: boolean
+  let history: History
+  let routing: Routing
+  let routingContext: RoutingContext
   let RoutingProvider
+
+  let options: {
+    activityName: string
+    params?: ActivityParams
+    query?: ActivityQuery
+    method?: ActivitySetMethod
+  }
 
   beforeEach(() => {
     $container = createContainer()
@@ -59,7 +69,7 @@ describe('Routing Trigger', () => {
     component = await render(element, {$container})
   }
 
-  function interceptClick(event) {
+  function interceptClick(event: ReactMouseEvent<HTMLElement, MouseEvent>) {
     defaultPrevented = event.defaultPrevented
     event.preventDefault()
   }
@@ -103,8 +113,8 @@ describe('Routing Trigger', () => {
       options = {
         activityName: 'listUsers',
         query: {
-          page: 1,
-          perPage: 10,
+          page: '1',
+          perPage: '10',
         },
       }
       await renderComponent()
