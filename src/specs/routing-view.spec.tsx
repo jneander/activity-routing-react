@@ -1,6 +1,6 @@
 import {Routing} from '@jneander/activity-routing-history'
 import {createContainer} from '@jneander/spec-utils-dom'
-import {render} from '@jneander/spec-utils-react'
+import {render} from '@testing-library/react'
 import {createMemoryHistory} from 'history'
 
 import {createRoutingContext} from '../routing-context'
@@ -9,8 +9,8 @@ import type {RoutingProvider} from '../types'
 import {router} from './example-router'
 
 describe('RoutingView', () => {
-  let $container: HTMLElement
-  let component: Awaited<ReturnType<typeof render>>
+  let container: HTMLElement
+  let component: ReturnType<typeof render>
   let history
   let props: RoutingViewProps
   let routing: Routing
@@ -18,7 +18,7 @@ describe('RoutingView', () => {
   let RoutingView: ReturnType<typeof createRoutingView>
 
   beforeEach(() => {
-    $container = createContainer()
+    container = createContainer()
 
     history = createMemoryHistory()
     routing = new Routing({history, router: router})
@@ -34,7 +34,7 @@ describe('RoutingView', () => {
 
   afterEach(() => {
     component.unmount()
-    $container.remove()
+    container.remove()
   })
 
   async function renderComponent() {
@@ -43,7 +43,7 @@ describe('RoutingView', () => {
         <RoutingView {...props} />
       </RoutingProvider>
     )
-    component = await render(element, {$container})
+    component = render(element, {container})
   }
 
   context('when given a "children" prop', () => {
@@ -51,7 +51,7 @@ describe('RoutingView', () => {
       it('renders the children', async () => {
         history.push('/users')
         await renderComponent()
-        const $content = $container.querySelector('p')
+        const $content = container.querySelector('p')
         expect($content.textContent).to.equal('Children Content')
       })
     })
@@ -60,7 +60,7 @@ describe('RoutingView', () => {
       it('does not render the children', async () => {
         history.push('/')
         await renderComponent()
-        const $content = $container.querySelector('p')
+        const $content = container.querySelector('p')
         expect($content).to.be.null
       })
     })
@@ -79,7 +79,7 @@ describe('RoutingView', () => {
       it('renders the children', async () => {
         history.push('/users')
         await renderComponent()
-        const $content = $container.querySelector('p')
+        const $content = container.querySelector('p')
         expect($content.textContent).to.equal('Component Content')
       })
     })
@@ -88,7 +88,7 @@ describe('RoutingView', () => {
       it('does not render the children', async () => {
         history.push('/')
         await renderComponent()
-        const $content = $container.querySelector('p')
+        const $content = container.querySelector('p')
         expect($content).to.be.null
       })
     })
