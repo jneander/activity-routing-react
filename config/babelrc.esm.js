@@ -1,16 +1,10 @@
 module.exports = {
-  env: {
-    production: {
-      plugins: [['transform-react-remove-prop-types', {removeImport: true}]],
-    },
-  },
-
   presets: [
     [
       '@babel/preset-env',
 
       {
-        modules: 'commonjs',
+        modules: false,
 
         targets: {
           browsers: require('./browserslist'),
@@ -20,6 +14,7 @@ module.exports = {
       },
     ],
 
+    '@babel/preset-typescript',
     '@babel/react',
   ],
 }

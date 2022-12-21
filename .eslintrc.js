@@ -16,6 +16,8 @@ module.exports = {
     'plugin:eslint-comments/recommended',
     'plugin:promise/recommended',
     'plugin:react/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
 
   globals: {},
@@ -26,11 +28,11 @@ module.exports = {
         node: true,
       },
 
-      files: ['./babel.config.js', './.eslintrc.js'],
+      files: ['./.eslintrc.js'],
     },
 
     {
-      files: ['./**/*.spec.js', './**/specs/**/*.js'],
+      files: ['./**/*.spec.ts', './**/*.spec.tsx', './**/specs/**/*'],
 
       globals: {
         expect: 'writable',
@@ -50,7 +52,7 @@ module.exports = {
     },
   ],
 
-  parser: '@babel/eslint-parser',
+  parser: '@typescript-eslint/parser',
 
   parserOptions: {
     ecmaFeatures: {
@@ -65,20 +67,32 @@ module.exports = {
   root: true,
 
   rules: {
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-unused-vars': ['error', {argsIgnorePattern: '^_'}],
     'arrow-body-style': 'off',
     'eslint-comments/no-unused-disable': 'error',
-    'import/extensions': ['error', 'ignorePackages', {js: 'never'}],
+    'import/extensions': ['error', 'ignorePackages', {js: 'never', ts: 'never', tsx: 'never'}],
     'import/no-extraneous-dependencies': ['error', {devDependencies: true}],
-    'no-unused-vars': ['error', {argsIgnorePattern: '^_'}],
+    'no-unused-vars': 'off',
     'prefer-arrow-callback': 'off',
     'prettier/prettier': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react-hooks/rules-of-hooks': 'error',
-    'react/jsx-filename-extension': ['error', {extensions: ['.js']}],
+    'react/jsx-filename-extension': ['error', {extensions: ['.ts', '.tsx']}],
+    'react/jsx-uses-react': 'off',
     'react/prop-types': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
 
   settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+
+    'import/resolver': {
+      typescript: {},
+    },
+
     react: {
       version: 'detect',
     },

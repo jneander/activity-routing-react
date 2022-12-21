@@ -2,20 +2,20 @@ import {Routing} from '@jneander/activity-routing-history'
 import {createContainer} from '@jneander/spec-utils-dom'
 import {render} from '@jneander/spec-utils-react'
 import {createMemoryHistory} from 'history'
-import React from 'react'
 
 import {createRoutingContext} from '../routing-context'
-import {createRoutingView} from '../routing-view'
+import {RoutingViewProps, createRoutingView} from '../routing-view'
+import type {RoutingProvider} from '../types'
 import {router} from './example-router'
 
 describe('RoutingView', () => {
-  let $container
-  let component
+  let $container: HTMLElement
+  let component: Awaited<ReturnType<typeof render>>
   let history
-  let props
-  let routing
-  let RoutingProvider
-  let RoutingView
+  let props: RoutingViewProps
+  let routing: Routing
+  let RoutingProvider: RoutingProvider
+  let RoutingView: ReturnType<typeof createRoutingView>
 
   beforeEach(() => {
     $container = createContainer()
@@ -27,6 +27,7 @@ describe('RoutingView', () => {
     RoutingView = createRoutingView(context.RoutingConsumer)
 
     props = {
+      children: <p>Children Content</p>,
       name: 'listUsers',
     }
   })
@@ -46,10 +47,6 @@ describe('RoutingView', () => {
   }
 
   context('when given a "children" prop', () => {
-    beforeEach(() => {
-      props.children = <p>Children Content</p>
-    })
-
     context('when navigated to the url for the activity', () => {
       it('renders the children', async () => {
         history.push('/users')

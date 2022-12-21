@@ -1,21 +1,22 @@
 import {Routing} from '@jneander/activity-routing-history'
 import {createContainer} from '@jneander/spec-utils-dom'
 import {render} from '@jneander/spec-utils-react'
-import {createMemoryHistory} from 'history'
-import React from 'react'
+import {History, createMemoryHistory} from 'history'
+import type {ReactNode} from 'react'
 import sinon from 'sinon'
 
 import {createRoutingContext} from '../routing-context'
+import type {RoutingConsumer, RoutingProvider} from '../types'
 import {router} from './example-router'
 
 describe('RoutingContext', () => {
-  let $container
-  let childFn
-  let component
-  let history
-  let routing
-  let RoutingConsumer
-  let RoutingProvider
+  let $container: HTMLElement
+  let childFn: (routing: Routing) => ReactNode
+  let component: Awaited<ReturnType<typeof render>>
+  let history: History
+  let routing: Routing
+  let RoutingConsumer: RoutingConsumer
+  let RoutingProvider: RoutingProvider
 
   beforeEach(() => {
     $container = createContainer()
@@ -45,8 +46,9 @@ describe('RoutingContext', () => {
 
   it('passes the router to the "children" render prop', async () => {
     let childArgs
-    childFn = (...args) => {
+    childFn = (...args: [Routing]) => {
       childArgs = args
+      return <></>
     }
     await renderComponent()
     expect(childArgs).to.have.ordered.members([routing])
