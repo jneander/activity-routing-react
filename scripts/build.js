@@ -11,7 +11,7 @@ const env = {
 }
 const sourcePath = path.join(cwd, 'src')
 
-const ignoreFiles = ['**/*.spec.js', '**/_specs_/**']
+const ignoreFiles = ['**/*.spec.js', '**/specs/**']
 
 function buildArgs(type) {
   const args = [
