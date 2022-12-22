@@ -1,6 +1,6 @@
 {
   "name": "@jneander/activity-routing-react",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Activity Routing with React",
   "exports": {
     "import": "./dist/esm/index.js",
