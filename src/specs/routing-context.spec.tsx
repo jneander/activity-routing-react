@@ -60,7 +60,7 @@ describe('RoutingContext', () => {
     expect($activity.textContent).to.equal('home')
   })
 
-  it.only('re-renders when the current activity changes', async () => {
+  it('re-renders when the current activity changes', async () => {
     await renderComponent()
     act(() => {
       history.push('/users')
