@@ -23,6 +23,7 @@
     "lint:prettier:fix": "prettier --write .",
     "prebuild": "npm run clean",
     "prepare": "[ -z $CI ] && git config --local core.hooksPath .githooks || true",
+    "prepublishOnly": "npm run build",
     "test": "./scripts/test.js",
     "test:head": "npm run test -- --no-headless",
     "test:head:watch": "npm run test -- --no-headless --watch",
