@@ -2,12 +2,18 @@ import type {ElementType, ReactNode} from 'react'
 
 import type {RoutingConsumer} from './types'
 
-export interface RoutingViewProps {
-  as?: ElementType
-  children: ReactNode
+export type RoutingViewProps = {
   name: string
-}
-
+} & (
+  | {
+      as?: never
+      children: ReactNode
+    }
+  | {
+      as: ElementType
+      children?: never
+    }
+)
 export function createRoutingView(RoutingConsumer: RoutingConsumer) {
   return function RoutingView(props: RoutingViewProps) {
     const {as: Component, children} = props
