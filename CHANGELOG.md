@@ -7,6 +7,13 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/jneander/activity-routing-react/compare/v1.2.3...v1.2.4) (2023-01-02)
+
+### Bug Fixes
+
+- clarify routing-view-props
+  ([b39bc7a](https://github.com/jneander/activity-routing-react/commit/b39bc7a831030197e1331ddb95b63e1a2769d44d))
+
 ## [1.2.3](https://github.com/jneander/activity-routing-react/compare/v1.2.2...v1.2.3) (2022-12-25)
 
 ### Bug Fixes
